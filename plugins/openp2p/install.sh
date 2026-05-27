@@ -29,13 +29,14 @@ install()
 	ln -sf $INSTALL_DIR/bin/openp2p /usr/sbin/openp2p
 	chmod +x $INSTALL_DIR/bin/openp2p
 
-	[ -f "$EXT_PLUGIN_CONFIG_DIR/$PLUGIN_NAME/autostart" ] && /usr/ikuai/function/plugin_$PLUGIN_NAME start
+	[ -f "$EXT_PLUGIN_CONFIG_DIR/$PLUGIN_NAME/autostart" ] && /usr/ikuai/function/plugin_$PLUGIN_NAME start >/dev/null 2>&1
 	touch /etc/log/app_dir/${PLUGIN_NAME}_installed
+	return 0
 }
 
 __uninstall()
 {
-	[ -x /usr/ikuai/function/plugin_$PLUGIN_NAME ] && /usr/ikuai/function/plugin_$PLUGIN_NAME stop
+	[ -x /usr/ikuai/function/plugin_$PLUGIN_NAME ] && /usr/ikuai/function/plugin_$PLUGIN_NAME stop >/dev/null 2>&1
 	rm -f /etc/log/app_dir/${PLUGIN_NAME}_installed
 
 	rm -rf $INSTALL_DIR
@@ -46,6 +47,7 @@ __uninstall()
 	rm -f /usr/ikuai/function/plugin_$PLUGIN_NAME
 
 	rm -f /usr/sbin/openp2p
+	return 0
 }
 
 uninstall()
@@ -56,6 +58,9 @@ uninstall()
 procname=$(basename $BASH_SOURCE)
 if [ "$procname" = "install.sh" ];then
         install ${1-boot}
+        exit $?
 elif [ "$procname" = "uninstall.sh" ];then
         uninstall
+        exit $?
 fi
+exit 0
