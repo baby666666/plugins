@@ -1,0 +1,21 @@
+{
+    "name": "socks5",
+    "alias": "SK5分流",
+    "manufacturer": "iKuai",
+    "version": "4.2.1",
+    "type": "external",
+    "description": "Socks5 插件支持连接远程多个socks5服务器，同时支持本地设备进行分流",
+    "releasenotes": "更新说明：<br>1、更新内核到 mihomo v1.19.25。<br>2、x86_64 使用 amd64-compatible 构建，mipsle 使用 softfloat 构建以提升设备兼容性。<br>3、保留原有分流、订阅导入、DNS防泄露和规则生成功能。",
+    "arch": ["arm64", "mipsle", "x86_64"],
+    "bin": {
+        "arm64": {
+            "bins/CrashCore-arm64.tar.gz": "bin/CrashCore.tar.gz"
+        },
+        "mipsle": {
+            "bins/CrashCore-mipsle.tar.gz": "bin/CrashCore.tar.gz"
+        },
+        "x86_64": {
+            "bins/CrashCore-x86_64.tar.gz": "bin/CrashCore.tar.gz"
+        }
+    }
+}
